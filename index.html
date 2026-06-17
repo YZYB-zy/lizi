@@ -136,12 +136,6 @@
         margin-bottom: 1rem;
       }
       
-      .mobile-view .card-float,
-      .mobile-view .card-float-delay-1,
-      .mobile-view .card-float-delay-2 {
-        animation: none;
-      }
-      
       .mobile-view .buy-container {
         padding: 4px;
       }
@@ -163,6 +157,20 @@
         font-size: 0.85rem;
         line-height: 1.5;
       }
+    }
+    
+    .mobile-card-float {
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .mobile-card-float-delay-1 {
+      animation: float 4s ease-in-out infinite;
+      animation-delay: 0.5s;
+    }
+    
+    .mobile-card-float-delay-2 {
+      animation: float 4s ease-in-out infinite;
+      animation-delay: 1s;
     }
     
     .desktop-preview {
@@ -434,7 +442,7 @@
           </div>
 
           <div class="space-y-5">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer mobile-card-float" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
               <div class="relative aspect-video">
                 <img src="public/images/微信图片_20260617192455_550_10.jpg" alt="玉皇李采摘畅吃" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -460,7 +468,7 @@
               </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer mobile-card-float-delay-1" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
               <div class="relative aspect-video">
                 <img src="public/images/微信图片_20260617192725_553_10.jpg" alt="玉皇李采摘体验" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -486,7 +494,7 @@
               </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer mobile-card-float-delay-2" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
               <div class="relative aspect-video">
                 <img src="public/images/微信图片_20260617192727_554_10.jpg" alt="团购优惠套餐" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
