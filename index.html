@@ -11,7 +11,6 @@
       font-family: 'Noto Serif SC', serif;
     }
     
-    /* 页面加载动画 */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -25,7 +24,6 @@
     .delay-200 { animation-delay: 200ms; }
     .delay-300 { animation-delay: 300ms; }
     
-    /* 卡片悬浮动画 */
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
@@ -45,7 +43,6 @@
       animation-delay: 1s;
     }
     
-    /* 光晕效果 */
     @keyframes glow {
       0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.3), 0 0 40px rgba(34, 197, 94, 0.1); }
       50% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.5), 0 0 60px rgba(34, 197, 94, 0.2); }
@@ -55,7 +52,6 @@
       animation: glow 2s ease-in-out infinite;
     }
     
-    /* 按钮脉冲动画 */
     @keyframes pulse-btn {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
@@ -65,7 +61,6 @@
       animation: pulse-btn 2s ease-in-out infinite;
     }
     
-    /* 渐变边框动画 */
     @keyframes border-gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -78,24 +73,6 @@
       animation: border-gradient 3s ease infinite;
     }
     
-    /* 闪光效果 */
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-    
-    .shimmer::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      animation: shimmer 3s infinite;
-    }
-    
-    /* 标题渐变动画 */
     @keyframes title-gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -103,15 +80,9 @@
     }
     
     .title-gradient {
-      background: linear-gradient(90deg, #166534, #22c55e, #84cc16, #22c55e, #166534);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: title-gradient 4s ease infinite;
+      color: #15803d;
     }
     
-    /* 卡片容器 */
     .product-card {
       position: relative;
       border-radius: 1rem;
@@ -123,7 +94,6 @@
       transform: translateY(-8px) scale(1.02);
     }
     
-    /* 购买按钮样式 */
     .buy-btn {
       transition: all 0.3s ease;
     }
@@ -133,29 +103,17 @@
       box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
     }
     
-    /* 图片遮罩 */
-    .img-overlay {
-      transition: all 0.4s ease;
+    .modal-enter {
+      animation: modalFadeIn 0.3s ease-out forwards;
     }
     
-    /* 装饰粒子 */
-    @keyframes particle {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-    }
-    
-    .particle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: rgba(34, 197, 94, 0.6);
-      border-radius: 50%;
-      animation: particle 3s infinite;
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
-  <!-- 背景装饰 -->
   <div class="fixed inset-0 overflow-hidden pointer-events-none">
     <div class="absolute top-20 left-10 w-72 h-72 bg-green-200/30 rounded-full blur-3xl"></div>
     <div class="absolute bottom-20 right-10 w-96 h-96 bg-emerald-200/30 rounded-full blur-3xl"></div>
@@ -186,13 +144,12 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- 卡片1 -->
         <div class="product-card card-float card-glow bg-white shadow-xl animate-fade-in-up cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
           <div class="gradient-border h-1"></div>
           <div class="relative aspect-[4/3] overflow-hidden">
             <img src="public/images/微信图片_20260617192455_550_10.jpg" alt="玉皇李采摘畅吃" 
                  class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-            <div class="img-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div class="absolute top-4 right-4">
               <span class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full animate-pulse">热销</span>
             </div>
@@ -210,18 +167,17 @@
             <p class="text-gray-600 text-sm leading-relaxed mb-4">戳链接得团购优惠，个大饱满，色泽金黄，果肉细腻，酸甜可口</p>
             <div class="flex items-center justify-between">
               <span class="text-green-600 font-bold text-lg">团购价</span>
-              <span class="text-gray-400 text-sm">点击查看详情 →</span>
+              <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(0)">查看详情 →</span>
             </div>
           </div>
         </div>
 
-        <!-- 卡片2 -->
         <div class="product-card card-float-delay-1 card-glow bg-white shadow-xl animate-fade-in-up delay-100 cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
           <div class="gradient-border h-1"></div>
           <div class="relative aspect-[4/3] overflow-hidden">
             <img src="public/images/微信图片_20260617192725_553_10.jpg" alt="玉皇李采摘体验" 
                  class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-            <div class="img-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div class="absolute top-4 right-4">
               <span class="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full">推荐</span>
             </div>
@@ -239,18 +195,17 @@
             <p class="text-gray-600 text-sm leading-relaxed mb-4">当日采摘，冷链配送，保证新鲜。自然成熟，无农药残留，安全放心</p>
             <div class="flex items-center justify-between">
               <span class="text-green-600 font-bold text-lg">限时优惠</span>
-              <span class="text-gray-400 text-sm">点击查看详情 →</span>
+              <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(1)">查看详情 →</span>
             </div>
           </div>
         </div>
 
-        <!-- 卡片3 -->
         <div class="product-card card-float-delay-2 card-glow bg-white shadow-xl animate-fade-in-up delay-200 cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
           <div class="gradient-border h-1"></div>
           <div class="relative aspect-[4/3] overflow-hidden">
             <img src="public/images/微信图片_20260617192727_554_10.jpg" alt="团购优惠套餐" 
                  class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-            <div class="img-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div class="absolute top-4 right-4">
               <span class="px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">精选</span>
             </div>
@@ -268,7 +223,7 @@
             <p class="text-gray-600 text-sm leading-relaxed mb-4">精美礼盒包装，送礼佳品。品质保证，售后无忧，让您送礼更有面子</p>
             <div class="flex items-center justify-between">
               <span class="text-green-600 font-bold text-lg">超值套餐</span>
-              <span class="text-gray-400 text-sm">点击查看详情 →</span>
+              <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(2)">查看详情 →</span>
             </div>
           </div>
         </div>
@@ -369,30 +324,143 @@
     </div>
   </footer>
 
+  <div id="detail-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-enter">
+      <div class="relative">
+        <img id="modal-image" src="" alt="产品详情" class="w-full h-64 object-cover">
+        <button onclick="closeDetail()" class="absolute top-4 right-4 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="p-8">
+        <h3 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4"></h3>
+        <div class="space-y-4 text-gray-600">
+          <div id="modal-description"></div>
+          <div class="border-t pt-4">
+            <h4 class="font-bold text-green-700 mb-2">产品特点</h4>
+            <ul id="modal-features" class="space-y-2"></ul>
+          </div>
+          <div class="border-t pt-4">
+            <h4 class="font-bold text-green-700 mb-2">购买须知</h4>
+            <ul id="modal-notes" class="space-y-2 text-sm"></ul>
+          </div>
+        </div>
+        <button onclick="window.open('https://v.douyin.com/9JTKUCd8FVo/', '_blank'); closeDetail()" class="mt-8 w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          立即购买
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // 点击卡片显示/隐藏购买按钮
+    let activeCard = null;
+    
+    const products = [
+      {
+        image: 'public/images/微信图片_20260617192455_550_10.jpg',
+        title: '玉皇李采摘畅吃加带走1斤',
+        description: '玉皇李采摘畅吃加带走1斤，戳链接得团购优惠。个大饱满，色泽金黄，果肉细腻，酸甜可口，富含维生素C，营养丰富。',
+        features: [
+          '· 采摘畅吃：入园即可尽情品尝新鲜玉皇李',
+          '· 带走1斤：采摘后可带走1斤新鲜果实',
+          '· 品质保证：精选优质果，个大饱满',
+          '· 团购优惠：限时团购价格，超值享受'
+        ],
+        notes: [
+          '· 使用时间：周一至周日 8:00-18:00',
+          '· 有效期：购买后30天内有效',
+          '· 无需预约，直接入园',
+          '· 儿童需单独购票'
+        ]
+      },
+      {
+        image: 'public/images/微信图片_20260617192725_553_10.jpg',
+        title: '玉皇李采摘体验',
+        description: '当日采摘，冷链配送，保证新鲜。自然成熟，无农药残留，安全放心。体验田园风光，亲手采摘新鲜水果。',
+        features: [
+          '· 当日采摘：新鲜采摘，保证品质',
+          '· 冷链配送：全程冷链，新鲜到家',
+          '· 无农药残留：绿色有机种植',
+          '· 田园体验：亲近自然，体验采摘乐趣'
+        ],
+        notes: [
+          '· 配送范围：全国大部分地区',
+          '· 配送时间：24-48小时送达',
+          '· 包装精美：防震保鲜包装',
+          '· 坏果包赔：如有损坏，免费补发'
+        ]
+      },
+      {
+        image: 'public/images/微信图片_20260617192727_554_10.jpg',
+        title: '团购优惠套餐',
+        description: '精美礼盒包装，送礼佳品。品质保证，售后无忧，让您送礼更有面子。适合节日送礼、亲友馈赠。',
+        features: [
+          '· 精美礼盒：高档礼盒包装，送礼有面',
+          '· 品质精选：精选优质玉皇李',
+          '· 团购优惠：多人团购更划算',
+          '· 售后无忧：全程保障，放心购买'
+        ],
+        notes: [
+          '· 礼盒规格：3斤装/5斤装可选',
+          '· 定制服务：支持企业定制',
+          '· 发票支持：可开具正规发票',
+          '· 送货上门：全国配送'
+        ]
+      }
+    ];
+
     function toggleBuyBtn(card, link) {
       const buyContainer = card.querySelector('.buy-container');
       const buyBtn = card.querySelector('.buy-btn');
       
+      if (activeCard && activeCard !== card) {
+        const activeBuyContainer = activeCard.querySelector('.buy-container');
+        activeBuyContainer.classList.remove('translate-y-0');
+        activeBuyContainer.classList.add('translate-y-full');
+      }
+      
       if (buyContainer.classList.contains('translate-y-full')) {
-        // 显示购买按钮
         buyContainer.classList.remove('translate-y-full');
         buyContainer.classList.add('translate-y-0');
+        activeCard = card;
         
-        // 给按钮添加点击事件
         buyBtn.onclick = function(e) {
           e.stopPropagation();
           window.open(link, '_blank');
         };
       } else {
-        // 隐藏购买按钮
         buyContainer.classList.remove('translate-y-0');
         buyContainer.classList.add('translate-y-full');
+        activeCard = null;
       }
     }
-    
-    // 页面加载动画
+
+    function showDetail(index) {
+      const product = products[index];
+      document.getElementById('modal-image').src = product.image;
+      document.getElementById('modal-title').textContent = product.title;
+      document.getElementById('modal-description').textContent = product.description;
+      
+      const featuresList = document.getElementById('modal-features');
+      featuresList.innerHTML = product.features.map(f => `<li>${f}</li>`).join('');
+      
+      const notesList = document.getElementById('modal-notes');
+      notesList.innerHTML = product.notes.map(n => `<li>${n}</li>`).join('');
+      
+      document.getElementById('detail-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetail() {
+      document.getElementById('detail-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const cards = document.querySelectorAll('.product-card');
       cards.forEach((card, index) => {
@@ -400,6 +468,12 @@
         setTimeout(() => {
           card.style.opacity = '1';
         }, index * 200);
+      });
+      
+      document.getElementById('detail-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeDetail();
+        }
       });
     });
   </script>
