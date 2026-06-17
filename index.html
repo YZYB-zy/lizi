@@ -441,7 +441,7 @@
                 <div class="absolute top-2 right-2">
                   <span class="px-2 py-0.5 bg-red-500 text-white text-xs font-bold rounded-full">热销</span>
                 </div>
-                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 transform translate-y-full transition-transform duration-300">
+                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 opacity-0 invisible transition-all duration-300">
                   <button class="w-full py-2.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg flex items-center justify-center gap-1.5" onclick="event.stopPropagation(); window.open('https://v.douyin.com/9JTKUCd8FVo/', '_blank')">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -467,7 +467,7 @@
                 <div class="absolute top-2 right-2">
                   <span class="px-2 py-0.5 bg-amber-500 text-white text-xs font-bold rounded-full">推荐</span>
                 </div>
-                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 transform translate-y-full transition-transform duration-300">
+                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 opacity-0 invisible transition-all duration-300">
                   <button class="w-full py-2.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg flex items-center justify-center gap-1.5" onclick="event.stopPropagation(); window.open('https://v.douyin.com/9JTKUCd8FVo/', '_blank')">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -493,7 +493,7 @@
                 <div class="absolute top-2 right-2">
                   <span class="px-2 py-0.5 bg-purple-500 text-white text-xs font-bold rounded-full">精选</span>
                 </div>
-                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 transform translate-y-full transition-transform duration-300">
+                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 opacity-0 invisible transition-all duration-300">
                   <button class="w-full py-2.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg flex items-center justify-center gap-1.5" onclick="event.stopPropagation(); window.open('https://v.douyin.com/9JTKUCd8FVo/', '_blank')">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -730,17 +730,17 @@
       
       if (activeCardMobile && activeCardMobile !== card) {
         const activeBuyContainer = activeCardMobile.querySelector('.buy-container-m');
-        activeBuyContainer.classList.remove('translate-y-0');
-        activeBuyContainer.classList.add('translate-y-full');
+        activeBuyContainer.classList.remove('opacity-100', 'visible');
+        activeBuyContainer.classList.add('opacity-0', 'invisible');
       }
       
-      if (buyContainer.classList.contains('translate-y-full')) {
-        buyContainer.classList.remove('translate-y-full');
-        buyContainer.classList.add('translate-y-0');
+      if (buyContainer.classList.contains('opacity-0')) {
+        buyContainer.classList.remove('opacity-0', 'invisible');
+        buyContainer.classList.add('opacity-100', 'visible');
         activeCardMobile = card;
       } else {
-        buyContainer.classList.remove('translate-y-0');
-        buyContainer.classList.add('translate-y-full');
+        buyContainer.classList.remove('opacity-100', 'visible');
+        buyContainer.classList.add('opacity-0', 'invisible');
         activeCardMobile = null;
       }
     }
