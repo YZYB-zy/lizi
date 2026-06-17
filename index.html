@@ -73,12 +73,6 @@
       animation: border-gradient 3s ease infinite;
     }
     
-    @keyframes title-gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
     .title-gradient {
       color: #fbbf24;
     }
@@ -111,6 +105,75 @@
       from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
     }
+    
+    .view-toggle-btn {
+      transition: all 0.3s ease;
+    }
+    
+    .view-toggle-btn.active {
+      background-color: #22c55e;
+      color: white;
+    }
+    
+    .view-toggle-btn:hover:not(.active) {
+      background-color: #f0fdf4;
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-view header {
+        padding: 12px 4px;
+      }
+      
+      .mobile-view h1 {
+        font-size: 2.5rem;
+      }
+      
+      .mobile-view .header-subtitle {
+        font-size: 1rem;
+      }
+      
+      .mobile-view .product-card {
+        margin-bottom: 1rem;
+      }
+      
+      .mobile-view .card-float,
+      .mobile-view .card-float-delay-1,
+      .mobile-view .card-float-delay-2 {
+        animation: none;
+      }
+      
+      .mobile-view .buy-container {
+        padding: 4px;
+      }
+      
+      .mobile-view .buy-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+      
+      .mobile-view .card-content {
+        padding: 12px;
+      }
+      
+      .mobile-view .card-title {
+        font-size: 1.1rem;
+      }
+      
+      .mobile-view .card-desc {
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+    }
+    
+    .desktop-preview {
+      width: 100%;
+      max-width: 375px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 8px solid #374151;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
@@ -120,209 +183,403 @@
     <div class="absolute top-1/2 left-1/2 w-80 h-80 bg-teal-200/20 rounded-full blur-3xl"></div>
   </div>
 
-  <header class="relative bg-gradient-to-r from-green-800 via-green-600 to-emerald-600 text-white py-16 px-4 shadow-2xl overflow-hidden">
-    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
-    <div class="max-w-6xl mx-auto text-center relative z-10">
-      <h1 class="text-5xl md:text-6xl font-bold mb-4 tracking-wider title-gradient">玉皇李</h1>
-      <p class="text-xl md:text-2xl text-green-100 font-light tracking-wide">大自然的馈赠，舌尖上的美味</p>
-      <div class="mt-6 flex justify-center gap-2">
-        <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">新鲜采摘</span>
-        <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">品质保证</span>
-        <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">团购优惠</span>
-      </div>
-    </div>
-  </header>
+  <div class="fixed top-4 right-4 z-40 flex gap-2">
+    <button id="mobile-view-btn" class="view-toggle-btn px-4 py-2 bg-white border border-green-200 rounded-lg text-sm font-medium text-gray-600 shadow-md flex items-center gap-2" onclick="switchView('mobile')">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+      </svg>
+      手机浏览
+    </button>
+    <button id="desktop-view-btn" class="view-toggle-btn px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-medium shadow-md flex items-center gap-2 active" onclick="switchView('desktop')">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      电脑浏览
+    </button>
+  </div>
 
-  <section class="relative py-20 px-4">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4">产品展示</h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
-        <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-          玉皇李，又名御黄李，是中国传统名贵水果。果实饱满圆润，色泽金黄如美玉，果肉细腻多汁，酸甜适口，香气浓郁。
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <div class="product-card card-float card-glow bg-white shadow-xl animate-fade-in-up cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
-          <div class="gradient-border h-1"></div>
-          <div class="relative aspect-[4/3] overflow-hidden">
-            <img src="public/images/微信图片_20260617192455_550_10.jpg" alt="玉皇李采摘畅吃" 
-                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <span class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full animate-pulse">热销</span>
-            </div>
-            <div class="buy-container absolute bottom-0 left-0 right-0 p-6 transform translate-y-full transition-transform duration-500">
-              <button class="buy-btn w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-xl shadow-lg btn-pulse flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-                立即购买
-              </button>
-            </div>
-          </div>
-          <div class="p-6 bg-white">
-            <h3 class="text-xl font-bold text-gray-800 mb-2">玉皇李采摘畅吃加带走1斤</h3>
-            <p class="text-gray-600 text-sm leading-relaxed mb-4">戳链接得团购优惠，个大饱满，色泽金黄，果肉细腻，酸甜可口</p>
-            <div class="flex items-center justify-between">
-              <span class="text-green-600 font-bold text-lg">团购价</span>
-              <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(0)">查看详情 →</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card card-float-delay-1 card-glow bg-white shadow-xl animate-fade-in-up delay-100 cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
-          <div class="gradient-border h-1"></div>
-          <div class="relative aspect-[4/3] overflow-hidden">
-            <img src="public/images/微信图片_20260617192725_553_10.jpg" alt="玉皇李采摘体验" 
-                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <span class="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full">推荐</span>
-            </div>
-            <div class="buy-container absolute bottom-0 left-0 right-0 p-6 transform translate-y-full transition-transform duration-500">
-              <button class="buy-btn w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-xl shadow-lg btn-pulse flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-                立即购买
-              </button>
-            </div>
-          </div>
-          <div class="p-6 bg-white">
-            <h3 class="text-xl font-bold text-gray-800 mb-2">玉皇李采摘体验</h3>
-            <p class="text-gray-600 text-sm leading-relaxed mb-4">当日采摘，冷链配送，保证新鲜。自然成熟，无农药残留，安全放心</p>
-            <div class="flex items-center justify-between">
-              <span class="text-green-600 font-bold text-lg">限时优惠</span>
-              <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(1)">查看详情 →</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card card-float-delay-2 card-glow bg-white shadow-xl animate-fade-in-up delay-200 cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
-          <div class="gradient-border h-1"></div>
-          <div class="relative aspect-[4/3] overflow-hidden">
-            <img src="public/images/微信图片_20260617192727_554_10.jpg" alt="团购优惠套餐" 
-                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-            <div class="absolute top-4 right-4">
-              <span class="px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">精选</span>
-            </div>
-            <div class="buy-container absolute bottom-0 left-0 right-0 p-6 transform translate-y-full transition-transform duration-500">
-              <button class="buy-btn w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-xl shadow-lg btn-pulse flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-                立即购买
-              </button>
-            </div>
-          </div>
-          <div class="p-6 bg-white">
-            <h3 class="text-xl font-bold text-gray-800 mb-2">团购优惠套餐</h3>
-            <p class="text-gray-600 text-sm leading-relaxed mb-4">精美礼盒包装，送礼佳品。品质保证，售后无忧，让您送礼更有面子</p>
-            <div class="flex items-center justify-between">
-              <span class="text-green-600 font-bold text-lg">超值套餐</span>
-              <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(2)">查看详情 →</span>
-            </div>
-          </div>
+  <div id="page-content" class="mobile-view">
+    <header class="relative bg-gradient-to-r from-green-800 via-green-600 to-emerald-600 text-white py-16 px-4 shadow-2xl overflow-hidden">
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+      <div class="max-w-6xl mx-auto text-center relative z-10">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 tracking-wider title-gradient">玉皇李</h1>
+        <p class="text-xl md:text-2xl text-green-100 font-light tracking-wide header-subtitle">大自然的馈赠，舌尖上的美味</p>
+        <div class="mt-6 flex justify-center gap-2 flex-wrap">
+          <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">新鲜采摘</span>
+          <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">品质保证</span>
+          <span class="px-3 py-1 bg-white/20 rounded-full text-sm backdrop-blur-sm">团购优惠</span>
         </div>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <section class="relative py-20 px-4 bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 text-white overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%23ffffff\" fill-opacity=\"1\" fill-rule=\"evenodd\"/%3E%3C/svg%3E')]"></div>
-    </div>
-    <div class="max-w-5xl mx-auto text-center relative z-10">
-      <h2 class="text-4xl font-bold mb-10">玉皇李的传说</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="group bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-          <div class="text-5xl mb-5 group-hover:scale-110 transition-transform duration-300">🌳</div>
-          <h3 class="text-2xl font-semibold mb-3">千年古树</h3>
-          <p class="text-green-100 leading-relaxed">源自千年古李树，传承百年种植技艺</p>
+    <section class="relative py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">产品展示</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
+          <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+            玉皇李，又名御黄李，是中国传统名贵水果。果实饱满圆润，色泽金黄如美玉，果肉细腻多汁，酸甜适口，香气浓郁。
+          </p>
         </div>
-        <div class="group bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-          <div class="text-5xl mb-5 group-hover:scale-110 transition-transform duration-300">👑</div>
-          <h3 class="text-2xl font-semibold mb-3">皇家贡品</h3>
-          <p class="text-green-100 leading-relaxed">曾为皇家贡品，深受帝王将相喜爱</p>
-        </div>
-        <div class="group bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-          <div class="text-5xl mb-5 group-hover:scale-110 transition-transform duration-300">✨</div>
-          <h3 class="text-2xl font-semibold mb-3">天然美味</h3>
-          <p class="text-green-100 leading-relaxed">自然生长，阳光雨露滋养，原汁原味</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="relative py-20 px-4">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4">营养价值</h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full"></div>
-      </div>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="group bg-white rounded-2xl shadow-xl p-10 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform duration-300">💊</div>
-            <h3 class="text-2xl font-bold text-green-700">富含维生素</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div class="product-card card-float card-glow bg-white shadow-xl animate-fade-in-up cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+            <div class="gradient-border h-1"></div>
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img src="public/images/微信图片_20260617192455_550_10.jpg" alt="玉皇李采摘畅吃" 
+                   class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute top-4 right-4">
+                <span class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full animate-pulse">热销</span>
+              </div>
+              <div class="buy-container absolute bottom-0 left-0 right-0 p-6 transform translate-y-full transition-transform duration-500">
+                <button class="buy-btn w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-xl shadow-lg btn-pulse flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                  立即购买
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white card-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-2 card-title">玉皇李采摘畅吃加带走1斤</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 card-desc">戳链接得团购优惠，个大饱满，色泽金黄，果肉细腻，酸甜可口</p>
+              <div class="flex items-center justify-between">
+                <span class="text-green-600 font-bold text-lg">团购价</span>
+                <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(0)">查看详情 →</span>
+              </div>
+            </div>
           </div>
-          <ul class="space-y-4 text-gray-600">
-            <li class="flex items-center gap-3">
-              <span class="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
-              <span><strong>维生素C：</strong>增强免疫力，抗氧化</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
-              <span><strong>维生素E：</strong>保护细胞膜，延缓衰老</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
-              <span><strong>维生素K：</strong>促进凝血，维护骨骼健康</span>
-            </li>
-          </ul>
-        </div>
-        <div class="group bg-white rounded-2xl shadow-xl p-10 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform duration-300">⚡</div>
-            <h3 class="text-2xl font-bold text-green-700">矿物质丰富</h3>
-          </div>
-          <ul class="space-y-4 text-gray-600">
-            <li class="flex items-center gap-3">
-              <span class="w-3 h-3 bg-emerald-500 rounded-full flex-shrink-0"></span>
-              <span><strong>钾元素：</strong>调节血压，维持心脏功能</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-3 h-3 bg-emerald-500 rounded-full flex-shrink-0"></span>
-              <span><strong>镁元素：</strong>促进新陈代谢，舒缓神经</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-3 h-3 bg-emerald-500 rounded-full flex-shrink-0"></span>
-              <span><strong>钙元素：</strong>强健骨骼，促进生长发育</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <footer class="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 px-4 overflow-hidden">
-    <div class="absolute inset-0 opacity-5">
-      <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"1\" fill-rule=\"evenodd\"%3E%3Cpath d=\"M0 40L40 0H20L0 20M40 40V20L20 40\"/%3E%3C/g%3E%3C/svg%3E')]"></div>
-    </div>
-    <div class="max-w-6xl mx-auto text-center relative z-10">
-      <h3 class="text-2xl font-bold text-green-400 mb-3">玉皇李 - 品质生活，从一颗好李开始</h3>
-      <p class="text-gray-400 mb-6">新鲜采摘 · 品质保证 · 团购优惠</p>
-      <div class="flex justify-center gap-4 mb-6">
-        <span class="px-4 py-2 bg-green-600/20 rounded-full text-green-400 text-sm">当日发货</span>
-        <span class="px-4 py-2 bg-green-600/20 rounded-full text-green-400 text-sm">冷链配送</span>
-        <span class="px-4 py-2 bg-green-600/20 rounded-full text-green-400 text-sm">售后无忧</span>
+          <div class="product-card card-float-delay-1 card-glow bg-white shadow-xl animate-fade-in-up delay-100 cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+            <div class="gradient-border h-1"></div>
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img src="public/images/微信图片_20260617192725_553_10.jpg" alt="玉皇李采摘体验" 
+                   class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute top-4 right-4">
+                <span class="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full">推荐</span>
+              </div>
+              <div class="buy-container absolute bottom-0 left-0 right-0 p-6 transform translate-y-full transition-transform duration-500">
+                <button class="buy-btn w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-xl shadow-lg btn-pulse flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                  立即购买
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white card-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-2 card-title">玉皇李采摘体验</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 card-desc">当日采摘，冷链配送，保证新鲜。自然成熟，无农药残留，安全放心</p>
+              <div class="flex items-center justify-between">
+                <span class="text-green-600 font-bold text-lg">限时优惠</span>
+                <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(1)">查看详情 →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card card-float-delay-2 card-glow bg-white shadow-xl animate-fade-in-up delay-200 cursor-pointer" onclick="toggleBuyBtn(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+            <div class="gradient-border h-1"></div>
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img src="public/images/微信图片_20260617192727_554_10.jpg" alt="团购优惠套餐" 
+                   class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute top-4 right-4">
+                <span class="px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">精选</span>
+              </div>
+              <div class="buy-container absolute bottom-0 left-0 right-0 p-6 transform translate-y-full transition-transform duration-500">
+                <button class="buy-btn w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-xl shadow-lg btn-pulse flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                  立即购买
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white card-content">
+              <h3 class="text-xl font-bold text-gray-800 mb-2 card-title">团购优惠套餐</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 card-desc">精美礼盒包装，送礼佳品。品质保证，售后无忧，让您送礼更有面子</p>
+              <div class="flex items-center justify-between">
+                <span class="text-green-600 font-bold text-lg">超值套餐</span>
+                <span class="text-gray-400 text-sm cursor-pointer hover:text-green-600 transition-colors" onclick="event.stopPropagation(); showDetail(2)">查看详情 →</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="text-gray-500 text-sm">© 2026 玉皇李官方商城 | 客服热线：400-888-8888</p>
+    </section>
+
+    <section class="relative py-20 px-4 bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 text-white overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%23ffffff\" fill-opacity=\"1\" fill-rule=\"evenodd\"/%3E%3C/svg%3E')]"></div>
+      </div>
+      <div class="max-w-5xl mx-auto text-center relative z-10">
+        <h2 class="text-4xl font-bold mb-10">玉皇李的传说</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="group bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+            <div class="text-5xl mb-5 group-hover:scale-110 transition-transform duration-300">🌳</div>
+            <h3 class="text-2xl font-semibold mb-3">千年古树</h3>
+            <p class="text-green-100 leading-relaxed">源自千年古李树，传承百年种植技艺</p>
+          </div>
+          <div class="group bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+            <div class="text-5xl mb-5 group-hover:scale-110 transition-transform duration-300">👑</div>
+            <h3 class="text-2xl font-semibold mb-3">皇家贡品</h3>
+            <p class="text-green-100 leading-relaxed">曾为皇家贡品，深受帝王将相喜爱</p>
+          </div>
+          <div class="group bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+            <div class="text-5xl mb-5 group-hover:scale-110 transition-transform duration-300">✨</div>
+            <h3 class="text-2xl font-semibold mb-3">天然美味</h3>
+            <p class="text-green-100 leading-relaxed">自然生长，阳光雨露滋养，原汁原味</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-20 px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">营养价值</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="group bg-white rounded-2xl shadow-xl p-10 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform duration-300">💊</div>
+              <h3 class="text-2xl font-bold text-green-700">富含维生素</h3>
+            </div>
+            <ul class="space-y-4 text-gray-600">
+              <li class="flex items-center gap-3">
+                <span class="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
+                <span><strong>维生素C：</strong>增强免疫力，抗氧化</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
+                <span><strong>维生素E：</strong>保护细胞膜，延缓衰老</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
+                <span><strong>维生素K：</strong>促进凝血，维护骨骼健康</span>
+              </li>
+            </ul>
+          </div>
+          <div class="group bg-white rounded-2xl shadow-xl p-10 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform duration-300">⚡</div>
+              <h3 class="text-2xl font-bold text-green-700">矿物质丰富</h3>
+            </div>
+            <ul class="space-y-4 text-gray-600">
+              <li class="flex items-center gap-3">
+                <span class="w-3 h-3 bg-emerald-500 rounded-full flex-shrink-0"></span>
+                <span><strong>钾元素：</strong>调节血压，维持心脏功能</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="w-3 h-3 bg-emerald-500 rounded-full flex-shrink-0"></span>
+                <span><strong>镁元素：</strong>促进新陈代谢，舒缓神经</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="w-3 h-3 bg-emerald-500 rounded-full flex-shrink-0"></span>
+                <span><strong>钙元素：</strong>强健骨骼，促进生长发育</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 px-4 overflow-hidden">
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"1\" fill-rule=\"evenodd\"%3E%3Cpath d=\"M0 40L40 0H20L0 20M40 40V20L20 40\"/%3E%3C/g%3E%3C/svg%3E')]"></div>
+      </div>
+      <div class="max-w-6xl mx-auto text-center relative z-10">
+        <h3 class="text-2xl font-bold text-green-400 mb-3">玉皇李 - 品质生活，从一颗好李开始</h3>
+        <p class="text-gray-400 mb-6">新鲜采摘 · 品质保证 · 团购优惠</p>
+        <div class="flex justify-center gap-4 mb-6 flex-wrap">
+          <span class="px-4 py-2 bg-green-600/20 rounded-full text-green-400 text-sm">当日发货</span>
+          <span class="px-4 py-2 bg-green-600/20 rounded-full text-green-400 text-sm">冷链配送</span>
+          <span class="px-4 py-2 bg-green-600/20 rounded-full text-green-400 text-sm">售后无忧</span>
+        </div>
+        <p class="text-gray-500 text-sm">© 2026 玉皇李官方商城 | 客服热线：400-888-8888</p>
+      </div>
+    </footer>
+  </div>
+
+  <div id="mobile-preview" class="hidden min-h-screen bg-gray-100 py-8 px-4">
+    <div class="desktop-preview">
+      <div class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 min-h-screen">
+        <div class="fixed inset-0 overflow-hidden pointer-events-none">
+          <div class="absolute top-10 left-5 w-32 h-32 bg-green-200/30 rounded-full blur-2xl"></div>
+          <div class="absolute bottom-10 right-5 w-40 h-40 bg-emerald-200/30 rounded-full blur-2xl"></div>
+        </div>
+
+        <header class="relative bg-gradient-to-r from-green-800 via-green-600 to-emerald-600 text-white py-8 px-3 shadow-lg">
+          <div class="text-center">
+            <h1 class="text-3xl font-bold mb-2 text-yellow-400">玉皇李</h1>
+            <p class="text-green-100 text-sm">大自然的馈赠，舌尖上的美味</p>
+            <div class="mt-3 flex justify-center gap-1.5 flex-wrap">
+              <span class="px-2 py-0.5 bg-white/20 rounded-full text-xs">新鲜采摘</span>
+              <span class="px-2 py-0.5 bg-white/20 rounded-full text-xs">品质保证</span>
+              <span class="px-2 py-0.5 bg-white/20 rounded-full text-xs">团购优惠</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="py-8 px-3">
+          <div class="text-center mb-8">
+            <h2 class="text-xl font-bold text-gray-800 mb-2">产品展示</h2>
+            <div class="w-12 h-0.5 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto mb-3"></div>
+            <p class="text-gray-500 text-xs leading-relaxed">
+              玉皇李，又名御黄李，果实饱满圆润，色泽金黄如美玉。
+            </p>
+          </div>
+
+          <div class="space-y-5">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+              <div class="relative aspect-video">
+                <img src="public/images/微信图片_20260617192455_550_10.jpg" alt="玉皇李采摘畅吃" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="absolute top-2 right-2">
+                  <span class="px-2 py-0.5 bg-red-500 text-white text-xs font-bold rounded-full">热销</span>
+                </div>
+                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 transform translate-y-full transition-transform duration-300">
+                  <button class="w-full py-2.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg flex items-center justify-center gap-1.5" onclick="event.stopPropagation(); window.open('https://v.douyin.com/9JTKUCd8FVo/', '_blank')">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    立即购买
+                  </button>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-800 text-base mb-1">玉皇李采摘畅吃加带走1斤</h3>
+                <p class="text-gray-500 text-xs mb-3">戳链接得团购优惠，个大饱满，酸甜可口</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-green-600 font-bold">团购价</span>
+                  <span class="text-gray-400 text-xs cursor-pointer hover:text-green-600" onclick="event.stopPropagation(); showDetail(0)">查看详情 →</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+              <div class="relative aspect-video">
+                <img src="public/images/微信图片_20260617192725_553_10.jpg" alt="玉皇李采摘体验" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="absolute top-2 right-2">
+                  <span class="px-2 py-0.5 bg-amber-500 text-white text-xs font-bold rounded-full">推荐</span>
+                </div>
+                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 transform translate-y-full transition-transform duration-300">
+                  <button class="w-full py-2.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg flex items-center justify-center gap-1.5" onclick="event.stopPropagation(); window.open('https://v.douyin.com/9JTKUCd8FVo/', '_blank')">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    立即购买
+                  </button>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-800 text-base mb-1">玉皇李采摘体验</h3>
+                <p class="text-gray-500 text-xs mb-3">当日采摘，冷链配送，无农药残留</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-green-600 font-bold">限时优惠</span>
+                  <span class="text-gray-400 text-xs cursor-pointer hover:text-green-600" onclick="event.stopPropagation(); showDetail(1)">查看详情 →</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="toggleBuyBtnMobile(this, 'https://v.douyin.com/9JTKUCd8FVo/')">
+              <div class="relative aspect-video">
+                <img src="public/images/微信图片_20260617192727_554_10.jpg" alt="团购优惠套餐" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="absolute top-2 right-2">
+                  <span class="px-2 py-0.5 bg-purple-500 text-white text-xs font-bold rounded-full">精选</span>
+                </div>
+                <div class="buy-container-m absolute bottom-0 left-0 right-0 p-3 transform translate-y-full transition-transform duration-300">
+                  <button class="w-full py-2.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg flex items-center justify-center gap-1.5" onclick="event.stopPropagation(); window.open('https://v.douyin.com/9JTKUCd8FVo/', '_blank')">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    立即购买
+                  </button>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-800 text-base mb-1">团购优惠套餐</h3>
+                <p class="text-gray-500 text-xs mb-3">精美礼盒包装，送礼佳品，售后无忧</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-green-600 font-bold">超值套餐</span>
+                  <span class="text-gray-400 text-xs cursor-pointer hover:text-green-600" onclick="event.stopPropagation(); showDetail(2)">查看详情 →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-8 px-3 bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 text-white">
+          <div class="text-center mb-6">
+            <h2 class="text-xl font-bold">玉皇李的传说</h2>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-white/10 rounded-xl p-4 text-center">
+              <div class="text-3xl mb-2">🌳</div>
+              <h3 class="font-semibold text-sm mb-1">千年古树</h3>
+              <p class="text-green-100 text-xs">传承百年种植技艺</p>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4 text-center">
+              <div class="text-3xl mb-2">👑</div>
+              <h3 class="font-semibold text-sm mb-1">皇家贡品</h3>
+              <p class="text-green-100 text-xs">深受帝王将相喜爱</p>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4 text-center">
+              <div class="text-3xl mb-2">✨</div>
+              <h3 class="font-semibold text-sm mb-1">天然美味</h3>
+              <p class="text-green-100 text-xs">阳光雨露滋养</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-8 px-3">
+          <div class="text-center mb-6">
+            <h2 class="text-xl font-bold text-gray-800">营养价值</h2>
+            <div class="w-12 h-0.5 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto mt-2"></div>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg flex items-center justify-center text-white text-lg">💊</div>
+                <h3 class="font-bold text-green-700">富含维生素</h3>
+              </div>
+              <ul class="text-gray-500 text-xs space-y-2">
+                <li>• 维生素C：增强免疫力，抗氧化</li>
+                <li>• 维生素E：保护细胞膜，延缓衰老</li>
+              </ul>
+            </div>
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-lg flex items-center justify-center text-white text-lg">⚡</div>
+                <h3 class="font-bold text-green-700">矿物质丰富</h3>
+              </div>
+              <ul class="text-gray-500 text-xs space-y-2">
+                <li>• 钾元素：调节血压，维持心脏功能</li>
+                <li>• 镁元素：促进新陈代谢，舒缓神经</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <footer class="bg-gray-800 text-white py-6 px-3">
+          <div class="text-center">
+            <h3 class="font-bold text-green-400 mb-2">玉皇李 - 品质生活</h3>
+            <p class="text-gray-400 text-xs mb-3">新鲜采摘 · 品质保证 · 团购优惠</p>
+            <div class="flex justify-center gap-2 mb-3">
+              <span class="px-2 py-1 bg-green-600/20 rounded-full text-green-400 text-xs">当日发货</span>
+              <span class="px-2 py-1 bg-green-600/20 rounded-full text-green-400 text-xs">售后无忧</span>
+            </div>
+            <p class="text-gray-500 text-xs">客服热线：400-888-8888</p>
+          </div>
+        </footer>
+      </div>
     </div>
-  </footer>
+  </div>
 
   <div id="detail-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-enter">
@@ -359,6 +616,7 @@
 
   <script>
     let activeCard = null;
+    let activeCardMobile = null;
     
     const products = [
       {
@@ -414,6 +672,33 @@
       }
     ];
 
+    function switchView(view) {
+      const pageContent = document.getElementById('page-content');
+      const mobilePreview = document.getElementById('mobile-preview');
+      const mobileBtn = document.getElementById('mobile-view-btn');
+      const desktopBtn = document.getElementById('desktop-view-btn');
+      
+      if (view === 'mobile') {
+        pageContent.classList.add('hidden');
+        mobilePreview.classList.remove('hidden');
+        mobileBtn.classList.add('active');
+        desktopBtn.classList.remove('active');
+        mobileBtn.classList.remove('bg-white', 'text-gray-600');
+        mobileBtn.classList.add('bg-green-500', 'text-white');
+        desktopBtn.classList.remove('bg-green-500', 'text-white');
+        desktopBtn.classList.add('bg-white', 'text-gray-600');
+      } else {
+        pageContent.classList.remove('hidden');
+        mobilePreview.classList.add('hidden');
+        desktopBtn.classList.add('active');
+        mobileBtn.classList.remove('active');
+        desktopBtn.classList.remove('bg-white', 'text-gray-600');
+        desktopBtn.classList.add('bg-green-500', 'text-white');
+        mobileBtn.classList.remove('bg-green-500', 'text-white');
+        mobileBtn.classList.add('bg-white', 'text-gray-600');
+      }
+    }
+
     function toggleBuyBtn(card, link) {
       const buyContainer = card.querySelector('.buy-container');
       const buyBtn = card.querySelector('.buy-btn');
@@ -437,6 +722,26 @@
         buyContainer.classList.remove('translate-y-0');
         buyContainer.classList.add('translate-y-full');
         activeCard = null;
+      }
+    }
+
+    function toggleBuyBtnMobile(card, link) {
+      const buyContainer = card.querySelector('.buy-container-m');
+      
+      if (activeCardMobile && activeCardMobile !== card) {
+        const activeBuyContainer = activeCardMobile.querySelector('.buy-container-m');
+        activeBuyContainer.classList.remove('translate-y-0');
+        activeBuyContainer.classList.add('translate-y-full');
+      }
+      
+      if (buyContainer.classList.contains('translate-y-full')) {
+        buyContainer.classList.remove('translate-y-full');
+        buyContainer.classList.add('translate-y-0');
+        activeCardMobile = card;
+      } else {
+        buyContainer.classList.remove('translate-y-0');
+        buyContainer.classList.add('translate-y-full');
+        activeCardMobile = null;
       }
     }
 
